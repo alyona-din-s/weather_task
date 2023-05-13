@@ -78,6 +78,7 @@ final class WeatherOfCityView: UIView {
         
         iconView.backgroundColor = .clear
         iconView.contentMode = .scaleAspectFill
+        iconView.clipsToBounds = true
         iconView.layer.cornerRadius = 40
         iconView.layer.borderColor = UIColor.white.cgColor
         iconView.layer.borderWidth = 2
@@ -101,6 +102,7 @@ final class WeatherOfCityView: UIView {
         titleOfCity.font = UIFont.boldSystemFont(ofSize: 24.0)
         titleOfCity.text = viewModel.getNameOfCity()
         titleOfCity.numberOfLines = 0
+        titleOfCity.adjustsFontSizeToFitWidth = true
     }
 
     private func setupTextView() {
@@ -111,7 +113,7 @@ final class WeatherOfCityView: UIView {
             textView.topAnchor.constraint(equalTo: titleOfCity.bottomAnchor, constant: 24),
             textView.leadingAnchor.constraint(equalTo: leadingAnchor),
             textView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            textView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.5)
+            textView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.6)
         ])
         
         textView.backgroundColor = UIColor.white.withAlphaComponent(0.7)

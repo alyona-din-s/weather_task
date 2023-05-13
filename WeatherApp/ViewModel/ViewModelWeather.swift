@@ -66,11 +66,11 @@ final class ViewModelWeather {
         return icon
     }
  
-    func getLastUpdateDate() -> String{
+    func getLastUpdateDate() -> String {
         guard let date = weatherInfo?.date else {  return "" }
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let nice_date = dateFormatter.string(from: date)
         return  kWeatherView_LastUpdated + ": " + nice_date
     }
@@ -90,19 +90,19 @@ final class ViewModelWeather {
                     self?.localStorageManager.saveWeather(city, weather)
                     self?.onWeatherLoaded?()
                 case .failure(let error as NSError) :
-                    switch error.code {
-                    case 0 :
-                        break
-                    case 400...500:
-                        if let weather = self?.localStorageManager.getWeather(city){
-                            self?.weatherInfo = weather
-                            self?.onWeatherLoaded?()
-                        } else {
-                            fallthrough
-                        }
-                    default:
+                    
+                    if let weather = self?.localStorageManager.getWeather(city){
+                        self?.weatherInfo = weather
+                        self?.onWeatherLoaded?()
+                        return
+                    }
+                    
+                    if ![NSURLErrorUnknown, 0].contains(error.code) {
                         self?.onWeatherLoadError?(error.localizedDescription)
-                    } 
+                    } else {
+                        //TODO: - fix local coding error
+                        self?.onWeatherLoadError?(kErrorInternal)
+                    }
                 }
             }
         }

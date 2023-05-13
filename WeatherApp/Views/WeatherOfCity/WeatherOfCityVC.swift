@@ -46,11 +46,7 @@ final class WeatherOfCityVC: BaseVC {
         loaderView.startAnimating()
         weatherOfCityView.loadInfo()
     }
-    
-    @objc private func reLoadAllData() {
-        weatherOfCityView.cleanView()
-        startLoadingData()
-    }
+     
 
     private func onIconLoaded(){
         weatherOfCityView.setIcon()
@@ -62,6 +58,7 @@ final class WeatherOfCityVC: BaseVC {
     }
     
     private func onWeatherLoadedWithError(_ errorLine: String){
+        loaderView.stopAnimating()
         showErrorAlert(errorLine)
     }
      

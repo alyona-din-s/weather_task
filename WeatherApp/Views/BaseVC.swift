@@ -48,7 +48,6 @@ class BaseVC : UIViewController {
        view.addSubview(background)
        
        background.image = UIImage(named: name)
-//       background.layer.opacity = 0.6
        background.contentMode = .scaleAspectFill
        background.translatesAutoresizingMaskIntoConstraints = false
        NSLayoutConstraint.activate([

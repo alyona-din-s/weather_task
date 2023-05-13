@@ -16,4 +16,4 @@ let kSourceWeatherIconNetworkData = "https://openweathermap.org/img/w/"
 let kAppKey = "e47e2fa1b9ca2c873cece6ce8d430b37"
 
 let kDefaultLanguage =  "en"
-let kDefaultMeasureUnit = "°C"
+let kDefaultMeasureUnitType = "metric"

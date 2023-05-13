@@ -21,10 +21,11 @@ final class ViewModelCities {
  
     
     // MARK: -
+    var onStartLoadingData : onInfoCompletion?
     var onCitiesLoaded: onInfoCompletion?
     var onCitiesLoadedError: onErrorCompletion?
     var onChoosenCity : ((CityEntity) -> Void)?
-          
+        
     
     // MARK: - Initializer
     init(networkManager: NetworkManager, localStorageManager: LocalStorage) {
@@ -56,13 +57,11 @@ final class ViewModelCities {
     }
     
     func loadCities(_ query_line: String)   {
+        guard !query_line.isEmpty else {return }
+         
+        onStartLoadingData?()
         
-        guard !query_line.isEmpty else {
-//            onCitiesLoadedError?(WeatherError.emptyCityQueryError.localizedDescription)
-            return
-        }
-        
-        let handler : ResultCitiesEntity = { result in
+        let handler : ResultCitiesEntity = { [weak self]  result in
             DispatchQueue.main.async{ [weak self] in
                 switch result {
                 case .success(let cities) :
@@ -71,19 +70,19 @@ final class ViewModelCities {
                     self?.onCitiesLoaded?()
                 case .failure(let error as NSError) :
 
-                    switch error.code {
-                    case 0 :
-                        break
-                    case 400...500:
-                        if let cities = self?.localStorageManager.getCities(query_line){
-                            self?.citiesArray = cities
-                            self?.onCitiesLoaded?()
-                        } else {
-                            fallthrough
-                        }
-                    default:
-                        self?.onCitiesLoadedError?(error.localizedDescription)
+                    if let cities = self?.localStorageManager.getCities(query_line){
+                        self?.citiesArray = cities
+                        self?.onCitiesLoaded?()
+                        return
                     }
+
+                    if ![NSURLErrorUnknown, 0].contains(error.code) {
+                        self?.onCitiesLoadedError?(error.localizedDescription)
+                    } else {
+                        //TODO: - fix local coding error
+                        self?.onCitiesLoadedError?(kErrorInternal)
+                    }
+
                 }
             }
         }

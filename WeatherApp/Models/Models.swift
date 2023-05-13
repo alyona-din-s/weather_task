@@ -13,6 +13,10 @@ struct CityEntity: Hashable, Codable {
     let lat: Double
     let lon: Double
     let country : String?
+    
+    func getKeyId() -> String {
+        return name + ".\(lat).\(lon)"
+    }
 
 }
 

@@ -20,6 +20,7 @@ final class CitiesListVC: BaseVC {
         super.init(nibName: nil, bundle: nil)
         self.title = kTitleChooseCity
 
+        viewModel.onStartLoadingData = self.startLoadingData
         viewModel.onChoosenCity = self.onChoosenCity
         viewModel.onCitiesLoaded = self.onCitiesLoaded
         viewModel.onCitiesLoadedError = self.onCitiesLoadedWithError
@@ -43,19 +44,16 @@ final class CitiesListVC: BaseVC {
     
     // MARK: - Private
     
+    
     override func startLoadingData() {
         loaderView.startAnimating()
-//        citiesListView.loadFirstDataForTableWith()
     }
-    
-    @objc private func reLoadAllData() {
-        citiesListView.cleanView()
-        startLoadingData()
-    }
-
+     
     private func onCitiesLoaded(){
-        loaderView.stopAnimating()
-        citiesListView.reloadTable()
+//        DispatchQueue.main.sync {
+            loaderView.stopAnimating()
+            citiesListView.reloadTable()
+//        }
     }
     
     private func onChoosenCity(_ city : CityEntity){

@@ -52,6 +52,6 @@ extension CitiesSearchBar: UISearchBarDelegate  {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let q = searchBar.text else { return }
         viewModel.loadCities(q)
-    }
+     }
 }
 
