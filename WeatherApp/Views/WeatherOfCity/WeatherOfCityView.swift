@@ -41,6 +41,7 @@ final class WeatherOfCityView: UIView {
         viewModel.resetAndClean()
         titleOfCity.text = viewModel.getNameOfCity()
         textView.text = ""
+        lastUpdate.text = ""
     }
     
     // MARK: - ViewModel connection
@@ -59,6 +60,8 @@ final class WeatherOfCityView: UIView {
     func reloadData(){
         viewModel.loadWeatherImage()
         textView.text = viewModel.getWeatherInfo()
+        lastUpdate.text =  viewModel.getLastUpdateDate()
+
     }
     
     // MARK: - Private
@@ -114,7 +117,7 @@ final class WeatherOfCityView: UIView {
         textView.backgroundColor = UIColor.white.withAlphaComponent(0.7)
         textView.isUserInteractionEnabled = false
         textView.textAlignment = .left
-        textView.font = UIFont.systemFont(ofSize: 14.0)
+        textView.font = UIFont.systemFont(ofSize: 16.0)
         
         textView.layer.cornerRadius = 8
         textView.layer.borderWidth = 2
@@ -131,14 +134,13 @@ final class WeatherOfCityView: UIView {
             lastUpdate.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
             lastUpdate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 14),
             lastUpdate.heightAnchor.constraint(equalToConstant: 24),
-            lastUpdate.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 14),
+            lastUpdate.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -14),
         ])
         
         lastUpdate.backgroundColor = .clear
         lastUpdate.textAlignment = .left
-        lastUpdate.textColor = .black
-        lastUpdate.font = UIFont.boldSystemFont(ofSize: 14.0)
-        lastUpdate.text = viewModel.getNameOfCity()
+        lastUpdate.textColor = .white
+        lastUpdate.font = UIFont.boldSystemFont(ofSize: 12.0)
     }
 }
   

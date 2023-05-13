@@ -13,14 +13,15 @@ final class WeatherNavigation : UINavigationController {
     //MARK: -  For switching to working  / testing modes
     
     private let networkManager = NetworkManagerImpl() // NetworkManagerMock()
+    private let localStorageManager = LocalStorageUserDefaults() //
 
     private func setCitiesListVC() -> CitiesListVC {
-        let viewModel = ViewModelCities(networkManager: networkManager)
+        let viewModel = ViewModelCities(networkManager: networkManager, localStorageManager: localStorageManager)
         let vc = CitiesListVC(viewModel: viewModel)
         return vc
     }
     private func setWeatherOfCityVC(for city: CityEntity) -> WeatherOfCityVC {
-        let viewModel = ViewModelWeather(networkManager: networkManager, city: city)
+        let viewModel = ViewModelWeather(networkManager: networkManager, localStorageManager: localStorageManager, city: city)
         let vc = WeatherOfCityVC(viewModel: viewModel)
         return vc
     }

@@ -16,8 +16,8 @@
 		095AF57E2A0EAB2300A33389 /* WeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF57D2A0EAB2300A33389 /* WeatherAppUITests.swift */; };
 		095AF5802A0EAB2300A33389 /* WeatherAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF57F2A0EAB2300A33389 /* WeatherAppUITestsLaunchTests.swift */; };
 		095AF58D2A0EABF100A33389 /* SourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF58C2A0EABF100A33389 /* SourceProtocol.swift */; };
-		095AF58F2A0EABFC00A33389 /* SourceNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF58E2A0EABFC00A33389 /* SourceNetwork.swift */; };
-		095AF5912A0EAC0300A33389 /* SourceStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5902A0EAC0300A33389 /* SourceStatic.swift */; };
+		095AF58F2A0EABFC00A33389 /* SourceNetworkImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF58E2A0EABFC00A33389 /* SourceNetworkImpl.swift */; };
+		095AF5912A0EAC0300A33389 /* SourceStaticMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5902A0EAC0300A33389 /* SourceStaticMock.swift */; };
 		095AF5942A0EAC2100A33389 /* ViewModelCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5932A0EAC2100A33389 /* ViewModelCities.swift */; };
 		095AF5972A0EAC5300A33389 /* CitiesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5962A0EAC5300A33389 /* CitiesListVC.swift */; };
 		095AF59A2A0EAC7700A33389 /* CitiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5992A0EAC7700A33389 /* CitiesListView.swift */; };
@@ -25,7 +25,7 @@
 		095AF5A42A0EACE100A33389 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5A32A0EACE100A33389 /* Models.swift */; };
 		095AF5A72A0EACF300A33389 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5A62A0EACF300A33389 /* Constants.swift */; };
 		095AF5A92A0EB07800A33389 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5A82A0EB07800A33389 /* Text.swift */; };
-		095AF5AB2A0EBAB900A33389 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5AA2A0EBAB900A33389 /* LocalStorage.swift */; };
+		095AF5AB2A0EBAB900A33389 /* LocalStorageUserDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5AA2A0EBAB900A33389 /* LocalStorageUserDef.swift */; };
 		095AF5AD2A0EBEDF00A33389 /* ViewModelWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5AC2A0EBEDF00A33389 /* ViewModelWeather.swift */; };
 		095AF5B12A0ED2A900A33389 /* WeatherOfCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5B02A0ED2A900A33389 /* WeatherOfCityView.swift */; };
 		095AF5B32A0ED3A000A33389 /* WeatherNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5B22A0ED3A000A33389 /* WeatherNavigation.swift */; };
@@ -64,8 +64,8 @@
 		095AF57D2A0EAB2300A33389 /* WeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITests.swift; sourceTree = "<group>"; };
 		095AF57F2A0EAB2300A33389 /* WeatherAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		095AF58C2A0EABF100A33389 /* SourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceProtocol.swift; sourceTree = "<group>"; };
-		095AF58E2A0EABFC00A33389 /* SourceNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceNetwork.swift; sourceTree = "<group>"; };
-		095AF5902A0EAC0300A33389 /* SourceStatic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceStatic.swift; sourceTree = "<group>"; };
+		095AF58E2A0EABFC00A33389 /* SourceNetworkImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceNetworkImpl.swift; sourceTree = "<group>"; };
+		095AF5902A0EAC0300A33389 /* SourceStaticMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceStaticMock.swift; sourceTree = "<group>"; };
 		095AF5932A0EAC2100A33389 /* ViewModelCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelCities.swift; sourceTree = "<group>"; };
 		095AF5962A0EAC5300A33389 /* CitiesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesListVC.swift; sourceTree = "<group>"; };
 		095AF5992A0EAC7700A33389 /* CitiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesListView.swift; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 		095AF5A32A0EACE100A33389 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		095AF5A62A0EACF300A33389 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		095AF5A82A0EB07800A33389 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
-		095AF5AA2A0EBAB900A33389 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
+		095AF5AA2A0EBAB900A33389 /* LocalStorageUserDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageUserDef.swift; sourceTree = "<group>"; };
 		095AF5AC2A0EBEDF00A33389 /* ViewModelWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelWeather.swift; sourceTree = "<group>"; };
 		095AF5B02A0ED2A900A33389 /* WeatherOfCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherOfCityView.swift; sourceTree = "<group>"; };
 		095AF5B22A0ED3A000A33389 /* WeatherNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNavigation.swift; sourceTree = "<group>"; };
@@ -106,6 +106,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		093ADB5B2A0F7AD4003977C7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				095AF58C2A0EABF100A33389 /* SourceProtocol.swift */,
+				095AF58E2A0EABFC00A33389 /* SourceNetworkImpl.swift */,
+				095AF5902A0EAC0300A33389 /* SourceStaticMock.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		093ADB5C2A0F7ADE003977C7 /* Local Data */ = {
+			isa = PBXGroup;
+			children = (
+				093ADB592A0F70AE003977C7 /* LocalSourceProtocol.swift */,
+				095AF5AA2A0EBAB900A33389 /* LocalStorageUserDef.swift */,
+			);
+			path = "Local Data";
+			sourceTree = "<group>";
+		};
 		095AF5502A0EAB2000A33389 = {
 			isa = PBXGroup;
 			children = (
@@ -165,11 +184,8 @@
 		095AF5922A0EAC0900A33389 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				095AF58C2A0EABF100A33389 /* SourceProtocol.swift */,
-				095AF58E2A0EABFC00A33389 /* SourceNetwork.swift */,
-				095AF5902A0EAC0300A33389 /* SourceStatic.swift */,
-				093ADB592A0F70AE003977C7 /* LocalSourceProtocol.swift */,
-				095AF5AA2A0EBAB900A33389 /* LocalStorage.swift */,
+				093ADB5B2A0F7AD4003977C7 /* Network */,
+				093ADB5C2A0F7ADE003977C7 /* Local Data */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -350,12 +366,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				095AF5912A0EAC0300A33389 /* SourceStatic.swift in Sources */,
+				095AF5912A0EAC0300A33389 /* SourceStaticMock.swift in Sources */,
 				095AF5A42A0EACE100A33389 /* Models.swift in Sources */,
 				095AF55D2A0EAB2000A33389 /* AppDelegate.swift in Sources */,
 				095AF5972A0EAC5300A33389 /* CitiesListVC.swift in Sources */,
-				095AF5AB2A0EBAB900A33389 /* LocalStorage.swift in Sources */,
-				095AF58F2A0EABFC00A33389 /* SourceNetwork.swift in Sources */,
+				095AF5AB2A0EBAB900A33389 /* LocalStorageUserDef.swift in Sources */,
+				095AF58F2A0EABFC00A33389 /* SourceNetworkImpl.swift in Sources */,
 				095AF5A72A0EACF300A33389 /* Constants.swift in Sources */,
 				095AF58D2A0EABF100A33389 /* SourceProtocol.swift in Sources */,
 				095AF5942A0EAC2100A33389 /* ViewModelCities.swift in Sources */,

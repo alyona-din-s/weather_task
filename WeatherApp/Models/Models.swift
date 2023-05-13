@@ -23,7 +23,7 @@ struct WeatherInfoEntity: Codable {
     let main : MainEntity
     let visibility : Double
     
-    var date: Date
+    var date: Date?
   }
  
 struct CoordEntity: Hashable, Codable {

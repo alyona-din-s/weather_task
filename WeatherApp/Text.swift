@@ -24,6 +24,7 @@ let kWeatherView_Feels_like  =  "Feels like"
 let kWeatherView_Pressure  =  "Atmospheric pressure"
 let kWeatherView_Humidity  =  "Humidity"
 let kWeatherView_Visibility  =  "Visibility"
+let kWeatherView_LastUpdated  =  "Last Update"
 
 
 let kAlertTitle = "Error"

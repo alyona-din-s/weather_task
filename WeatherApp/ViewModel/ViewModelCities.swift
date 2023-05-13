@@ -15,6 +15,8 @@ final class ViewModelCities {
  
     // MARK: - Properties
     private let networkManager: NetworkManager
+    private let localStorageManager: LocalStorage
+    
     private var citiesArray: [CityEntity] = []
  
     
@@ -25,8 +27,10 @@ final class ViewModelCities {
           
     
     // MARK: - Initializer
-    init(networkManager: NetworkManager) {
+    init(networkManager: NetworkManager, localStorageManager: LocalStorage) {
         self.networkManager = networkManager
+        self.localStorageManager = localStorageManager
+        
         self.citiesArray = []
       }
     
@@ -52,6 +56,7 @@ final class ViewModelCities {
     }
     
     func loadCities(_ query_line: String)   {
+        
         guard !query_line.isEmpty else {
 //            onCitiesLoadedError?(WeatherError.emptyCityQueryError.localizedDescription)
             return
@@ -62,9 +67,21 @@ final class ViewModelCities {
                 switch result {
                 case .success(let cities) :
                     self?.citiesArray = cities
+                    self?.localStorageManager.saveCitySearch(query_line, cities)
                     self?.onCitiesLoaded?()
                 case .failure(let error as NSError) :
-                    if error.code != 0 {
+
+                    switch error.code {
+                    case 0 :
+                        break
+                    case 400...500:
+                        if let cities = self?.localStorageManager.getCities(query_line){
+                            self?.citiesArray = cities
+                            self?.onCitiesLoaded?()
+                        } else {
+                            fallthrough
+                        }
+                    default:
                         self?.onCitiesLoadedError?(error.localizedDescription)
                     }
                 }

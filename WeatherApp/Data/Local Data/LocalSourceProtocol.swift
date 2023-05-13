@@ -7,10 +7,11 @@
 
 import Foundation
 
-protocol LocalSourceProtocol {
+protocol LocalStorage {
     
-    func saveWeather(_ weather : WeatherEntity)
+    func saveWeather(_ city: CityEntity, _ weather : WeatherInfoEntity)
     func saveCitySearch(_ q: String, _ cities: [CityEntity])
+    
     func getCities(_ q: String) -> [CityEntity]?
-    func getWeather(_ city: CityEntity) -> WeatherEntity?
+    func getWeather(_ city: CityEntity) -> WeatherInfoEntity?
 }

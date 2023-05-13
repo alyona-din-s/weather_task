@@ -14,6 +14,8 @@ final class ViewModelWeather {
  
     // MARK: - Properties
     private let networkManager: NetworkManager
+    private let localStorageManager: LocalStorage
+
     private var city: CityEntity
     private var icon: UIImage?
     private var weatherInfo: WeatherInfoEntity?
@@ -27,8 +29,9 @@ final class ViewModelWeather {
 
     
     // MARK: - Initializer
-    init(networkManager: NetworkManager, city: CityEntity) {
+    init(networkManager: NetworkManager, localStorageManager: LocalStorage, city: CityEntity) {
         self.networkManager = networkManager
+        self.localStorageManager = localStorageManager
         self.city = city
         self.weatherInfo = nil
      }
@@ -67,25 +70,39 @@ final class ViewModelWeather {
         guard let date = weatherInfo?.date else {  return "" }
 
         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
         let nice_date = dateFormatter.string(from: date)
-        
-        return nice_date
+        return  kWeatherView_LastUpdated + ": " + nice_date
     }
  
     // MARK: - Source load
    
     func loadWeatherInfo()   {
+        let city = city
         let coords = CoordEntity(lat: city.lat, lon: city.lon)
         
         let handler : ResultWeatherEntity = { result in
             DispatchQueue.main.async{ [weak self] in
                 switch result {
-                case .success(let weather) :
+                case .success(var weather) :
+                    weather.date = Date()
                     self?.weatherInfo = weather
-                    self?.weatherInfo?.date = Date()
+                    self?.localStorageManager.saveWeather(city, weather)
                     self?.onWeatherLoaded?()
-                case .failure(let error_line) :
-                    self?.onWeatherLoadError?(error_line.localizedDescription)
+                case .failure(let error as NSError) :
+                    switch error.code {
+                    case 0 :
+                        break
+                    case 400...500:
+                        if let weather = self?.localStorageManager.getWeather(city){
+                            self?.weatherInfo = weather
+                            self?.onWeatherLoaded?()
+                        } else {
+                            fallthrough
+                        }
+                    default:
+                        self?.onWeatherLoadError?(error.localizedDescription)
+                    } 
                 }
             }
         }
