@@ -37,7 +37,11 @@ final class ViewModelCities {
     
     func getCityName(_ ind: Int) -> String? {
         guard ind < citiesArray.count else{ return nil }
-        return citiesArray[ind].name
+        var name = citiesArray[ind].name.capitalized
+        if let country = citiesArray[ind].country  {
+            name += " (" + country.capitalized + ")"
+        }
+        return name
     }
 
     
@@ -59,8 +63,10 @@ final class ViewModelCities {
                 case .success(let cities) :
                     self?.citiesArray = cities
                     self?.onCitiesLoaded?()
-                case .failure(let error_line) :
-                    self?.onCitiesLoadedError?(error_line.localizedDescription)
+                case .failure(let error as NSError) :
+                    if error.code != 0 {
+                        self?.onCitiesLoadedError?(error.localizedDescription)
+                    }
                 }
             }
         }

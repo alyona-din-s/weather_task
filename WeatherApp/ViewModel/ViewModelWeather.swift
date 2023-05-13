@@ -39,25 +39,40 @@ final class ViewModelWeather {
               let weather_description = weatherInfo.weather.first else {  return "" }
         let weather_main = weatherInfo.main
 
-        var answer = weather_description.description.capitalized + "\n"
-        answer += "Temperature" + " = \(weather_main.temp)\n"
-        answer += "Min temperature" + " = \(weather_main.temp_max)\n"
-        answer += "Min temperature" + " = \(weather_main.temp_min)\n"
-        answer += "Feels like" + " = \(weather_main.feels_like)\n"
-        answer += "Pressure" + " = \(weather_main.pressure)\n"
-        answer += "Humidity" + " = \(weather_main.humidity)\n"
-        answer += "Visibility" + " = \(weatherInfo.visibility)"
+        var answer = weather_description.description.capitalized + "\n\n"
+        answer += kWeatherView_Temperature + " = \(weather_main.temp)\(kDefaultMeasureUnit)\n\n"
+        answer += kWeatherView_Min_temperature + " = \(weather_main.temp_min)\(kDefaultMeasureUnit)\n"
+        answer += kWeatherView_Max_temperature + " = \(weather_main.temp_max)\(kDefaultMeasureUnit)\n"
+        answer += kWeatherView_Feels_like + " = \(weather_main.feels_like)\(kDefaultMeasureUnit)\n\n"
+        answer += kWeatherView_Pressure + " = \(weather_main.pressure) hPa\n"
+        answer += kWeatherView_Humidity + " = \(weather_main.humidity)%\n"
+        answer += kWeatherView_Visibility + " = \(weatherInfo.visibility) m"
  
         return answer
     }
-
-    func getNameOfCity() -> String{
-        return city.name
+    
+    func getNameOfCity() -> String? {
+        var name = kWeatherView_city + ": " + city.name.capitalized
+        if let country = city.country  {
+            name += "\n" + kWeatherView_country + ": " + country.capitalized 
+        }
+        return name
     }
+ 
     func getIconUIImage() -> UIImage? {
         return icon
     }
-    // MARK: - Public
+ 
+    func getLastUpdateDate() -> String{
+        guard let date = weatherInfo?.date else {  return "" }
+
+        let dateFormatter = DateFormatter()
+        let nice_date = dateFormatter.string(from: date)
+        
+        return nice_date
+    }
+ 
+    // MARK: - Source load
    
     func loadWeatherInfo()   {
         let coords = CoordEntity(lat: city.lat, lon: city.lon)
@@ -67,6 +82,7 @@ final class ViewModelWeather {
                 switch result {
                 case .success(let weather) :
                     self?.weatherInfo = weather
+                    self?.weatherInfo?.date = Date()
                     self?.onWeatherLoaded?()
                 case .failure(let error_line) :
                     self?.onWeatherLoadError?(error_line.localizedDescription)
@@ -95,7 +111,6 @@ final class ViewModelWeather {
         
         networkManager.loadWeatherIcon(icon_name, handler)
     }
-    
     
     func resetAndClean(){
         networkManager.resetAll()

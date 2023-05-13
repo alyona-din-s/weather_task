@@ -11,19 +11,23 @@ import Foundation
 // Text
 
 let kTitleMain =  "Weather App"
- 
 
-let kTitleChooseCity =  "Choose City"
-let kPlaceholderForSearchLine  =  "Type the city..."
+let kTitleChooseCity =  "Find your City"
+let kPlaceholderForSearchLine  =  "Type the city name"
+
+let kWeatherView_city  =  "City"
+let kWeatherView_country  =  "Country"
+let kWeatherView_Temperature  =  "Temperature"
+let kWeatherView_Min_temperature  =  "Minimum temperature at the moment"
+let kWeatherView_Max_temperature  =  "Maximum temperature at the moment"
+let kWeatherView_Feels_like  =  "Feels like"
+let kWeatherView_Pressure  =  "Atmospheric pressure"
+let kWeatherView_Humidity  =  "Humidity"
+let kWeatherView_Visibility  =  "Visibility"
+
 
 let kAlertTitle = "Error"
 let kAlertButtonReload = "Reload"
 let kAlertButtonCancel = "Cancel"
 let kAlertButtonOk = "Ok"
-
-
-
-let kError_customError = "Some error happened, but do not worry! We will fix it"
-let kError_internalAppLogicError =  "Some error in code"
-let kError_emptyCityQueryError = "Search city for the weather"
-let kError_noErrorAndEmptyDataError = "Repeath the request"
+ 

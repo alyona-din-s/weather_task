@@ -8,10 +8,12 @@
 
 import Foundation
 
-struct CityEntity: Codable {
+struct CityEntity: Hashable, Codable {
     let name: String
     let lat: Double
     let lon: Double
+    let country : String?
+
 }
 
 struct WeatherInfoEntity: Codable {
@@ -20,6 +22,8 @@ struct WeatherInfoEntity: Codable {
     let weather: [WeatherEntity]
     let main : MainEntity
     let visibility : Double
+    
+    var date: Date
   }
  
 struct CoordEntity: Hashable, Codable {

@@ -28,9 +28,10 @@ final class NetworkManagerImpl: NetworkManager {
         
     }
     func loadWeatherData(_ coords: CoordEntity, _ completion: @escaping ResultWeatherEntity){
-        let request_line = kSourceWeatherNetworkData + "?lat=\(coords.lat)&lon=\(coords.lon)&appid=\(kAppKey)"
+        var request_line = kSourceWeatherNetworkData + "?lat=\(coords.lat)&lon=\(coords.lon)&appid=\(kAppKey)"
+        request_line += "&units=metric&lang=\(kDefaultLanguage)"
         print(request_line)
-        loadEntitiesData(request_line, completion)
+         loadEntitiesData(request_line, completion)
     }
     
     func loadWeatherIcon(_ name: String, _ completion: @escaping ResultImageEntity){

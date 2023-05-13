@@ -15,6 +15,7 @@ final class WeatherOfCityView: UIView {
     private let titleOfCity = UILabel()
     private let textView = UITextView()
     private let iconView = UIImageView()
+    private let lastUpdate = UILabel()
 
         
     // MARK: - Initializer
@@ -33,6 +34,7 @@ final class WeatherOfCityView: UIView {
         setupIconView()
         setupTitleView()
         setupTextView()
+        setupLastUpdateView()
     }
     
     func cleanView()   {
@@ -67,15 +69,15 @@ final class WeatherOfCityView: UIView {
         NSLayoutConstraint.activate([
             iconView.topAnchor.constraint(equalTo: topAnchor, constant: 14),
             iconView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
-            iconView.heightAnchor.constraint(equalToConstant: 60),
+            iconView.heightAnchor.constraint(equalToConstant: 80),
             iconView.widthAnchor.constraint(equalTo: iconView.heightAnchor),
         ])
         
         iconView.backgroundColor = .clear
         iconView.contentMode = .scaleAspectFill
-        iconView.layer.cornerRadius = 30
-        iconView.clipsToBounds = true
-
+        iconView.layer.cornerRadius = 40
+        iconView.layer.borderColor = UIColor.white.cgColor
+        iconView.layer.borderWidth = 2
  
     }
  
@@ -95,6 +97,7 @@ final class WeatherOfCityView: UIView {
         titleOfCity.textColor = .black
         titleOfCity.font = UIFont.boldSystemFont(ofSize: 24.0)
         titleOfCity.text = viewModel.getNameOfCity()
+        titleOfCity.numberOfLines = 0
     }
 
     private func setupTextView() {
@@ -104,16 +107,38 @@ final class WeatherOfCityView: UIView {
         NSLayoutConstraint.activate([
             textView.topAnchor.constraint(equalTo: titleOfCity.bottomAnchor, constant: 24),
             textView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            textView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            textView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            textView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            textView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.5)
         ])
         
-        textView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        textView.backgroundColor = UIColor.white.withAlphaComponent(0.7)
         textView.isUserInteractionEnabled = false
         textView.textAlignment = .left
-        textView.font = UIFont.systemFont(ofSize: 20.0)
+        textView.font = UIFont.systemFont(ofSize: 14.0)
+        
+        textView.layer.cornerRadius = 8
+        textView.layer.borderWidth = 2
+        textView.layer.borderColor = UIColor.white.cgColor
+
 
     }
-  
+    
+    private func setupLastUpdateView() {
+        addSubview(lastUpdate)
+        
+        lastUpdate.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            lastUpdate.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
+            lastUpdate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 14),
+            lastUpdate.heightAnchor.constraint(equalToConstant: 24),
+            lastUpdate.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 14),
+        ])
+        
+        lastUpdate.backgroundColor = .clear
+        lastUpdate.textAlignment = .left
+        lastUpdate.textColor = .black
+        lastUpdate.font = UIFont.boldSystemFont(ofSize: 14.0)
+        lastUpdate.text = viewModel.getNameOfCity()
+    }
 }
   
