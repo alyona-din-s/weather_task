@@ -75,8 +75,9 @@ extension CitiesListView: UITableViewDataSource , UITableViewDelegate {
     }
  
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
+ 
+        viewModel.onSelectCityAt(indexPath.row)
+
     }
      
 }

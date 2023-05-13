@@ -21,11 +21,11 @@ final class NetworkManagerImpl: NetworkManager {
 
 
     // MARK: - Protocol
-    func loadCitiesData(_ q: String, _ completion: ResultCitiesEntity){
+    func loadCitiesData(_ q: String, _ completion: @escaping ResultCitiesEntity){
         loadEntitiesData(kSourceCitiesNetworkData + "?q=\(q)&limit=50&appid=\(kAppKey)", completion)
 
     }
-    func loadWeatherData(_ coords: CoordEntity, _ completion: ResultWeatherEntity){
+    func loadWeatherData(_ coords: CoordEntity, _ completion: @escaping ResultWeatherEntity){
         loadEntitiesData(kSourceWeatherNetworkData + "lat=\(coords.lat)&lon=\(coords.lon)&appid=\(kAppKey)", completion)
 
     }
@@ -37,7 +37,7 @@ final class NetworkManagerImpl: NetworkManager {
     
     // MARK: - Private
 
-    private func loadEntitiesData<T: Decodable>(_ source: String, _ completion: (Result<T, WeatherError>) -> Void) {
+    private func loadEntitiesData<T: Decodable>(_ source: String, _ completion: @escaping (Result<T, WeatherError>) -> Void) {
        guard  let url = URL(string: source) else {
            completion(.failure(WeatherError.emptyCityQueryError))
            return

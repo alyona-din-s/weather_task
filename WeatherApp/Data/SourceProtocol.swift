@@ -11,8 +11,8 @@ typealias ResultCitiesEntity =  (Result<[CityEntity], WeatherError>) -> Void
 typealias ResultWeatherEntity =  (Result<WeatherInfoEntity, WeatherError>) -> Void
 
 protocol NetworkManager {
-    func loadCitiesData(_ q: String, _ completion: ResultCitiesEntity)
-    func loadWeatherData(_ coords: CoordEntity, _ completion:ResultWeatherEntity)
+    func loadCitiesData(_ q: String, _ completion: @escaping ResultCitiesEntity)
+    func loadWeatherData(_ coords: CoordEntity, _ completion: @escaping ResultWeatherEntity)
     func resetAll()
  }
 

@@ -29,10 +29,7 @@ final class ViewModelWeather {
         self.networkManager = networkManager
         self.coords = coords
         self.weatherInfo = nil
-        
-        resetAndClean()
-         
-    }
+     }
     
     // MARK: - Public
    

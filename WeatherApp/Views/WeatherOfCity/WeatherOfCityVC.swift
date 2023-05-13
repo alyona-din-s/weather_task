@@ -11,8 +11,7 @@ import UIKit
 
 final class WeatherOfCityVC: BaseVC {
 
-    private let loaderView = UIActivityIndicatorView()
-    private let textView = UITextView() 
+    private let textView = UITextView()
     private let weatherOfCityView: WeatherOfCityView
 
 
@@ -43,7 +42,7 @@ final class WeatherOfCityVC: BaseVC {
     
     // MARK: - Private
     
-    private func startLoadingData() {
+    override func startLoadingData() {
         loaderView.startAnimating()
         weatherOfCityView.loadInfo()
     }
@@ -65,27 +64,9 @@ final class WeatherOfCityVC: BaseVC {
 
 
 // MARK: - Setup Views
+ 
 
-extension CitiesListVC: UISearchBarDelegate  {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-       
-         citiesListView.reloadTable()
-    }
-}
-
-
-extension CitiesListVC   {
-    
-    func showErrorAlert(_ line: String) {
-        let alert = UIAlertController(title: kAlertTitle, message: line, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: kAlertButtonCancel, style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: kAlertButtonReload, style: .default){ _ in
-            self.startLoadingData()
-        })
-        
-        self.present(alert, animated: true, completion: nil)
-    }
+extension WeatherOfCityVC   {
  
     private func setupViews(){
         view.backgroundColor = .white
@@ -107,19 +88,6 @@ extension CitiesListVC   {
         
         weatherOfCityView.setupTextView()
     }
-
-    private func setupLoaderView() {
-        view.addSubview(loaderView)
-
-        loaderView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            loaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loaderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
-        
-        loaderView.style = .large
-        loaderView.hidesWhenStopped = true
-    }
-  
  
 }
 

@@ -13,7 +13,7 @@ final class NetworkManagerMock: NetworkManager {
  
     
     // MARK: - Protocol
-    func loadCitiesData(_ q: String, _ completion: ResultCitiesEntity  ){
+    func loadCitiesData(_ q: String, _ completion: @escaping ResultCitiesEntity  ){
         
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             let listCitiesSample = self.loadCitiesSamplesArray(100)
@@ -21,7 +21,7 @@ final class NetworkManagerMock: NetworkManager {
         }
     }
 
-    func loadWeatherData(_ coords: CoordEntity, _ completion: ResultWeatherEntity ){
+    func loadWeatherData(_ coords: CoordEntity, _ completion: @escaping ResultWeatherEntity ){
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             let weatherSample = self.loadOneCityWeatherSample(coords)
             completion(.success(weatherSample))

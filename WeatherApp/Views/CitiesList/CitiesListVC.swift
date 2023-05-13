@@ -10,7 +10,6 @@ import UIKit
 
 final class CitiesListVC: BaseVC {
 
-    private let loaderView = UIActivityIndicatorView()
     private let searchBar = UISearchBar()
     private let citiesListView: CitiesListView
  
@@ -19,6 +18,7 @@ final class CitiesListVC: BaseVC {
         self.citiesListView = CitiesListView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
         
+        viewModel.onChoosenCity = self.onChoosenCity
         viewModel.onCitiesLoaded = self.onCitiesLoaded
         viewModel.onCitiesLoadedError = self.onCitiesLoadedWithError
         
@@ -34,14 +34,9 @@ final class CitiesListVC: BaseVC {
         setupViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        startLoadingData()
-
-    }
-    
     // MARK: - Private
     
-    private func startLoadingData() {
+    override func startLoadingData() {
         loaderView.startAnimating()
         citiesListView.loadFirstDataForTableWith()
     }
@@ -54,6 +49,11 @@ final class CitiesListVC: BaseVC {
     private func onCitiesLoaded(){
         loaderView.stopAnimating()
         citiesListView.reloadTable()
+    }
+    
+    private func onChoosenCity(_ coords : CoordEntity){
+        guard let nvc = navigationController as? WeatherNavigation else { return }
+        nvc.openWeatherVC(coords)
     }
     
     private func onCitiesLoadedWithError(_ errorLine: String){
@@ -70,9 +70,6 @@ extension CitiesListVC: UISearchBarDelegate  {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
        
-        
-//        citiesListView.
-        citiesListView.reloadTable()
     }
 }
 
@@ -114,18 +111,6 @@ extension CitiesListVC   {
         citiesListView.setupTableView()
     }
 
-    private func setupLoaderView() {
-        view.addSubview(loaderView)
-
-        loaderView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            loaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loaderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
-        
-        loaderView.style = .large
-        loaderView.hidesWhenStopped = true
-    }
-  
  
 }
 
