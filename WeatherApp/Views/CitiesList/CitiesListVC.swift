@@ -17,7 +17,8 @@ final class CitiesListVC: BaseVC {
     init(viewModel: ViewModelCities) {
         self.citiesListView = CitiesListView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
-        
+        self.title = kTitleChooseCity
+
         viewModel.onChoosenCity = self.onChoosenCity
         viewModel.onCitiesLoaded = self.onCitiesLoaded
         viewModel.onCitiesLoadedError = self.onCitiesLoadedWithError
@@ -51,9 +52,9 @@ final class CitiesListVC: BaseVC {
         citiesListView.reloadTable()
     }
     
-    private func onChoosenCity(_ coords : CoordEntity){
+    private func onChoosenCity(_ city : CityEntity){
         guard let nvc = navigationController as? WeatherNavigation else { return }
-        nvc.openWeatherVC(coords)
+        nvc.openWeatherVC(city)
     }
     
     private func onCitiesLoadedWithError(_ errorLine: String){
@@ -95,6 +96,7 @@ extension CitiesListVC   {
             searchBar.widthAnchor.constraint(equalTo: view.widthAnchor)]
         )
         searchBar.delegate = self
+        searchBar.placeholder = kPlaceholderForSearchLine
      }
     
     private func setupCitiesListView() {

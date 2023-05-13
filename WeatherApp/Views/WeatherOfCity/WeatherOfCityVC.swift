@@ -11,6 +11,7 @@ import UIKit
 
 final class WeatherOfCityVC: BaseVC {
 
+    private let background = UIImageView()
     private let textView = UITextView()
     private let weatherOfCityView: WeatherOfCityView
 
@@ -19,7 +20,8 @@ final class WeatherOfCityVC: BaseVC {
     init(viewModel: ViewModelWeather) {
         self.weatherOfCityView = WeatherOfCityView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
-        
+        self.title = viewModel.getNameOfCity()
+
         viewModel.onWeatherLoaded = self.onWeatherLoaded
         viewModel.onWeatherLoadError = self.onWeatherLoadedWithError
         
@@ -75,6 +77,21 @@ extension WeatherOfCityVC   {
         setupLoaderView()
     }
      
+    private func setupBackgroundView() {
+        view.addSubview(background)
+        
+        background.image = UIImage(named: "bg2")
+        background.contentMode = .scaleAspectFill
+        background.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            background.topAnchor.constraint(equalTo: view.bottomAnchor),
+            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            background.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            background.widthAnchor.constraint(equalTo: view.widthAnchor)]
+        )
+        
+    }
+    
     private func setupWeatherView() {
         view.addSubview(weatherOfCityView)
         

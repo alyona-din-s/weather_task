@@ -22,7 +22,7 @@ final class ViewModelCities {
     // MARK: -
     var onCitiesLoaded: onInfoCompletion?
     var onCitiesLoadedError: onErrorCompletion?
-    var onChoosenCity : ((CoordEntity) -> Void)?
+    var onChoosenCity : ((CityEntity) -> Void)?
           
     
     // MARK: - Initializer
@@ -44,8 +44,9 @@ final class ViewModelCities {
 
     
     func onSelectCityAt(_ ind: Int) {
-        guard let coords = getCoords(from: ind) else { return  }
-        onChoosenCity?(coords)
+        guard ind < citiesArray.count else { return }
+        let city = citiesArray[ind]
+        onChoosenCity?(city)
     }
     
     func loadCities()   {
@@ -68,20 +69,12 @@ final class ViewModelCities {
         
         networkManager.loadCitiesData(query_line, handler)
     }
-
-    //MARK: - Private
     
-    private func getCoords(from : Int) -> CoordEntity? {
-         guard from < citiesArray.count else { return nil }
-         let city = citiesArray[from]
-         return CoordEntity(lat: city.lat, lon: city.lon)
-     }
-    private func resetAndClean(){
-       citiesArray.removeAll()
-       networkManager.resetAll()
-   }
-    
-    
+    func resetAndClean(){
+        citiesArray.removeAll()
+        networkManager.resetAll()
+    }
+     
     
 }
     

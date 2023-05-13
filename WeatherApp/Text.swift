@@ -10,9 +10,11 @@ import Foundation
 
 // Text
 
-let kTitleMain =  "WeatherApp"
+let kTitleMain =  "Weather App"
+ 
 
-let kChooseCity =  "Choose City"
+let kTitleChooseCity =  "Choose City"
+let kPlaceholderForSearchLine  =  "Type the city..."
 
 let kAlertTitle = "Error"
 let kAlertButtonReload = "Reload"

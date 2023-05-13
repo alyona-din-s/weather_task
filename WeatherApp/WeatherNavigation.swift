@@ -16,11 +16,13 @@ final class WeatherNavigation : UINavigationController {
 
     private func setCitiesListVC() -> CitiesListVC {
         let viewModel = ViewModelCities(networkManager: networkManager)
-        return CitiesListVC(viewModel: viewModel)
+        let vc = CitiesListVC(viewModel: viewModel)
+        return vc
     }
-    private func setWeatherOfCityVC(_ coords: CoordEntity) -> WeatherOfCityVC {
-        let viewModel = ViewModelWeather(networkManager: networkManager, coords: coords)
-        return WeatherOfCityVC(viewModel: viewModel)
+    private func setWeatherOfCityVC(for city: CityEntity) -> WeatherOfCityVC {
+        let viewModel = ViewModelWeather(networkManager: networkManager, city: city)
+        let vc = WeatherOfCityVC(viewModel: viewModel)
+        return vc
     }
     
  
@@ -37,8 +39,8 @@ final class WeatherNavigation : UINavigationController {
     }
     
     
-    func openWeatherVC(_ coords: CoordEntity){
-        let weatherVC = self.setWeatherOfCityVC(coords)
+    func openWeatherVC(_ city: CityEntity){
+        let weatherVC = self.setWeatherOfCityVC(for: city)
         pushViewController(weatherVC, animated: true)
     }
     

@@ -14,7 +14,7 @@ final class ViewModelWeather {
  
     // MARK: - Properties
     private let networkManager: NetworkManager
-    private var coords: CoordEntity
+    private var city: CityEntity
     private var weatherInfo: WeatherInfoEntity?
  
     
@@ -25,15 +25,19 @@ final class ViewModelWeather {
 
     
     // MARK: - Initializer
-    init(networkManager: NetworkManager, coords : CoordEntity) {
+    init(networkManager: NetworkManager, city: CityEntity) {
         self.networkManager = networkManager
-        self.coords = coords
+        self.city = city
         self.weatherInfo = nil
      }
     
+    func getNameOfCity() -> String{
+        return city.name
+    }
     // MARK: - Public
    
-    func loadWeatherInfo()   { 
+    func loadWeatherInfo()   {
+        let coords = CoordEntity(lat: city.lat, lon: city.lon)
         
         let handler : ResultWeatherEntity = { result in
             DispatchQueue.main.async{ [weak self] in
@@ -54,7 +58,7 @@ final class ViewModelWeather {
     func resetAndClean(){
         networkManager.resetAll()
     }
-     
+ 
 }
     
 
