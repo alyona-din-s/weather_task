@@ -30,6 +30,7 @@
 		095AF5B12A0ED2A900A33389 /* WeatherOfCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5B02A0ED2A900A33389 /* WeatherOfCityView.swift */; };
 		095AF5B32A0ED3A000A33389 /* WeatherNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5B22A0ED3A000A33389 /* WeatherNavigation.swift */; };
 		095AF5B52A0ED9BF00A33389 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5B42A0ED9BF00A33389 /* BaseVC.swift */; };
+		095AF5B72A0F44B700A33389 /* CitiesSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AF5B62A0F44B700A33389 /* CitiesSearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		095AF5B02A0ED2A900A33389 /* WeatherOfCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherOfCityView.swift; sourceTree = "<group>"; };
 		095AF5B22A0ED3A000A33389 /* WeatherNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNavigation.swift; sourceTree = "<group>"; };
 		095AF5B42A0ED9BF00A33389 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		095AF5B62A0F44B700A33389 /* CitiesSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesSearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			children = (
 				095AF5962A0EAC5300A33389 /* CitiesListVC.swift */,
 				095AF5992A0EAC7700A33389 /* CitiesListView.swift */,
+				095AF5B62A0F44B700A33389 /* CitiesSearchBar.swift */,
 			);
 			path = CitiesList;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				095AF5B52A0ED9BF00A33389 /* BaseVC.swift in Sources */,
 				095AF59A2A0EAC7700A33389 /* CitiesListView.swift in Sources */,
 				095AF5B32A0ED3A000A33389 /* WeatherNavigation.swift in Sources */,
+				095AF5B72A0F44B700A33389 /* CitiesSearchBar.swift in Sources */,
 				095AF5AD2A0EBEDF00A33389 /* ViewModelWeather.swift in Sources */,
 				095AF59E2A0EAC9D00A33389 /* WeatherOfCityVC.swift in Sources */,
 			);
@@ -462,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -516,7 +520,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -531,15 +535,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -559,15 +565,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

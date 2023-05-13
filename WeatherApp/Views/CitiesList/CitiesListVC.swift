@@ -10,11 +10,12 @@ import UIKit
 
 final class CitiesListVC: BaseVC {
 
-    private let searchBar = UISearchBar()
+    private let searchBarView: CitiesSearchBar
     private let citiesListView: CitiesListView
  
     // MARK: - Initializer
     init(viewModel: ViewModelCities) {
+        self.searchBarView = CitiesSearchBar(viewModel: viewModel)
         self.citiesListView = CitiesListView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
         self.title = kTitleChooseCity
@@ -35,11 +36,16 @@ final class CitiesListVC: BaseVC {
         setupViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchBarView.openKeyBoard()
+    }
+    
     // MARK: - Private
     
     override func startLoadingData() {
         loaderView.startAnimating()
-        citiesListView.loadFirstDataForTableWith()
+//        citiesListView.loadFirstDataForTableWith()
     }
     
     @objc private func reLoadAllData() {
@@ -64,39 +70,29 @@ final class CitiesListVC: BaseVC {
      
 }
 
-
-// MARK: - Setup Views
-
-extension CitiesListVC: UISearchBarDelegate  {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-       
-    }
-}
-
-
 extension CitiesListVC   {
     
  
     private func setupViews(){
         view.backgroundColor = .white
 
+        setupBackgroundView("bg1")
         setupSearchBar()
         setupCitiesListView()
         setupLoaderView()
     }
-    
+     
     private func setupSearchBar() {
-        view.addSubview(searchBar)
+        view.addSubview(searchBarView)
 
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchBar.widthAnchor.constraint(equalTo: view.widthAnchor)]
+            searchBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            searchBarView.widthAnchor.constraint(equalTo: view.widthAnchor)]
         )
-        searchBar.delegate = self
-        searchBar.placeholder = kPlaceholderForSearchLine
+        searchBarView.setupView()
+
      }
     
     private func setupCitiesListView() {
@@ -104,7 +100,7 @@ extension CitiesListVC   {
         
         citiesListView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            citiesListView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            citiesListView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
             citiesListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             citiesListView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             citiesListView.widthAnchor.constraint(equalTo: view.widthAnchor)]

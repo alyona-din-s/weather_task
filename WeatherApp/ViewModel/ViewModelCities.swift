@@ -16,8 +16,7 @@ final class ViewModelCities {
     // MARK: - Properties
     private let networkManager: NetworkManager
     private var citiesArray: [CityEntity] = []
-    private var query_line: String = ""
-
+ 
     
     // MARK: -
     var onCitiesLoaded: onInfoCompletion?
@@ -29,8 +28,7 @@ final class ViewModelCities {
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
         self.citiesArray = []
-        self.query_line = ""
-     }
+      }
     
     // MARK: - Public
     func getNumberOfLoadedCities() -> Int{
@@ -49,9 +47,9 @@ final class ViewModelCities {
         onChoosenCity?(city)
     }
     
-    func loadCities()   {
+    func loadCities(_ query_line: String)   {
         guard !query_line.isEmpty else {
-            onCitiesLoadedError?(WeatherError.emptyCityQueryError.localizedDescription)
+//            onCitiesLoadedError?(WeatherError.emptyCityQueryError.localizedDescription)
             return
         }
         

@@ -25,6 +25,5 @@ let kAlertButtonOk = "Ok"
 
 let kError_customError = "Some error happened, but do not worry! We will fix it"
 let kError_internalAppLogicError =  "Some error in code"
-let kError_emptyCityCoordError = "Return back And try again"
 let kError_emptyCityQueryError = "Search city for the weather"
 let kError_noErrorAndEmptyDataError = "Repeath the request"

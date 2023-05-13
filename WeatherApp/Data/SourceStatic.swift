@@ -28,6 +28,14 @@ final class NetworkManagerMock: NetworkManager {
         }
     }
      
+    func loadWeatherIcon(_ name: String, _ completion: @escaping ResultImageEntity){
+        guard let tmp_data = UIImage(named: "default_img")?.pngData() else {
+            completion(.failure(NSError()))
+            return
+        }
+        completion(.success(tmp_data))
+    }
+
     //MARK: - private fill
     private func loadCitiesSamplesArray(_ count: Int) -> [CityEntity] {
         var array = [CityEntity]()

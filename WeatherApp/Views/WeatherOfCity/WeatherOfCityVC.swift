@@ -11,7 +11,6 @@ import UIKit
 
 final class WeatherOfCityVC: BaseVC {
 
-    private let background = UIImageView()
     private let textView = UITextView()
     private let weatherOfCityView: WeatherOfCityView
 
@@ -20,10 +19,10 @@ final class WeatherOfCityVC: BaseVC {
     init(viewModel: ViewModelWeather) {
         self.weatherOfCityView = WeatherOfCityView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
-        self.title = viewModel.getNameOfCity()
-
+ 
         viewModel.onWeatherLoaded = self.onWeatherLoaded
         viewModel.onWeatherLoadError = self.onWeatherLoadedWithError
+        viewModel.onIconDataLoaded = self.onIconLoaded
         
     }
     
@@ -39,7 +38,6 @@ final class WeatherOfCityVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         startLoadingData()
-
     }
     
     // MARK: - Private
@@ -54,7 +52,12 @@ final class WeatherOfCityVC: BaseVC {
         startLoadingData()
     }
 
+    private func onIconLoaded(){
+        weatherOfCityView.setIcon()
+    }
+    
     private func onWeatherLoaded(){
+        loaderView.stopAnimating()
         weatherOfCityView.reloadData()
     }
     
@@ -73,37 +76,23 @@ extension WeatherOfCityVC   {
     private func setupViews(){
         view.backgroundColor = .white
 
+        setupBackgroundView("bg2")
         setupWeatherView()
         setupLoaderView()
     }
-     
-    private func setupBackgroundView() {
-        view.addSubview(background)
-        
-        background.image = UIImage(named: "bg2")
-        background.contentMode = .scaleAspectFill
-        background.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            background.topAnchor.constraint(equalTo: view.bottomAnchor),
-            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            background.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            background.widthAnchor.constraint(equalTo: view.widthAnchor)]
-        )
-        
-    }
-    
+
     private func setupWeatherView() {
         view.addSubview(weatherOfCityView)
         
         weatherOfCityView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherOfCityView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            weatherOfCityView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            weatherOfCityView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             weatherOfCityView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            weatherOfCityView.widthAnchor.constraint(equalTo: view.widthAnchor)]
+            weatherOfCityView.heightAnchor.constraint(equalTo: view.heightAnchor ,multiplier: 0.8),
+            weatherOfCityView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)]
         )
         
-        weatherOfCityView.setupTextView()
+        weatherOfCityView.setupView()
     }
  
 }

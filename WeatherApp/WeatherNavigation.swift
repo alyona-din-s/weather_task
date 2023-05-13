@@ -41,7 +41,8 @@ final class WeatherNavigation : UINavigationController {
     
     func openWeatherVC(_ city: CityEntity){
         let weatherVC = self.setWeatherOfCityVC(for: city)
-        pushViewController(weatherVC, animated: true)
+        present(weatherVC, animated: true, completion: nil)
+//        pushViewController(weatherVC, animated: true)
     }
     
     func goBack(){

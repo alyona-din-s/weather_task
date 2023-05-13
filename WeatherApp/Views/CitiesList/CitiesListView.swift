@@ -24,22 +24,15 @@ final class CitiesListView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Loading Data
-    func loadFirstDataForTableWith() {
-        viewModel.loadCities()
-    }
-    
+ 
     func reloadTable() {
         self.tableView.reloadData()
     }
-    
-     
+ 
     func cleanView()   {
-        
+        backgroundColor = .clear
         viewModel.resetAndClean()
         reloadTable()
- 
     }
     
     // MARK: - UI Setup
@@ -53,10 +46,11 @@ final class CitiesListView: UIView {
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             tableView.rightAnchor.constraint(equalTo: rightAnchor)
         ])
-        
+        tableView.backgroundColor = .clear
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.rowHeight = 64
   
     }
@@ -69,8 +63,9 @@ extension CitiesListView: UITableViewDataSource , UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
         cell.textLabel?.text =  viewModel.getCityName(indexPath.row)
+        cell.selectionStyle = .none
         return cell
     }
  

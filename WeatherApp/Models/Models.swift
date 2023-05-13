@@ -15,12 +15,12 @@ struct CityEntity: Codable {
 }
 
 struct WeatherInfoEntity: Codable {
+    let name : String
     let coord: CoordEntity
     let weather: [WeatherEntity]
     let main : MainEntity
     let visibility : Double
-    let wind : WindEntity
- }
+  }
  
 struct CoordEntity: Hashable, Codable {
     let lat: Double
@@ -41,13 +41,5 @@ struct MainEntity: Codable {
     let temp_max : Double
     let pressure : Double
     let humidity : Double
-    let sea_level : Double
-    let grnd_level : Double
-}
-
-struct WindEntity: Codable {
-    let speed : Double
-    let deg : Double
-    let gust : Double
 }
  
